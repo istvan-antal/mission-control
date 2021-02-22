@@ -1,0 +1,243 @@
+{
+    "name": "mission-control",
+    "version": "0.0.1",
+    "main": "index.js",
+    "author": "István Antal <istvan@antal.xyz>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "build": "webpack -p",
+        "dev": "webpack --mode=development",
+        "start": "qode ./dist/index.js",
+        "debug": "qode --inspect ./dist/index.js"
+    },
+    "dependencies": {
+        "@apollo/client": "^3.3.11",
+        "@nodegui/nodegui": "^0.15.3",
+        "@nodegui/os-utils": "^1.1.2",
+        "@nodegui/react-nodegui": "^0.9.0",
+        "@types/luxon": "^1.26.0",
+        "@types/node-fetch": "^2.5.8",
+        "dotenv": "^8.2.0",
+        "graphql": "^15.5.0",
+        "luxon": "^1.26.0",
+        "node-fetch": "^2.6.1",
+        "open": "^7.2.1",
+        "react": "^16.13.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/preset-env": "^7.11.5",
+        "@babel/preset-react": "^7.10.4",
+        "@babel/preset-typescript": "^7.10.4",
+        "@nodegui/packer": "^1.4.1",
+        "@types/node": "^14.11.1",
+        "@types/react": "^16.9.49",
+        "@types/webpack-env": "^1.15.3",
+        "babel-loader": "^8.1.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "eslint": "^7.12.1",
+        "eslint-config-airbnb": "^18.2.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-config-airbnb-typescript": "^12.0.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-config-react-app": "^6.0.0",
+        "eslint-import-resolver-typescript": "^2.3.0",
+        "eslint-plugin-cypress": "^2.11.1",
+        "eslint-plugin-flowtype": "^5.2.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.20.6",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "file-loader": "^6.1.0",
+        "fork-ts-checker-webpack-plugin": "^5.2.0",
+        "native-addon-loader": "^2.0.1",
+        "prettier": "^2.1.1",
+        "typescript": "^4.0.3",
+        "webpack": "^4.44.2",
+        "webpack-cli": "^3.3.12"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "airbnb-typescript",
+            "prettier/@typescript-eslint",
+            "plugin:prettier/recommended",
+            "plugin:@typescript-eslint/recommended"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "cypress",
+            "prettier"
+        ],
+        "env": {
+            "cypress/globals": true
+        },
+        "rules": {
+            "prettier/prettier": "error",
+            "complexity": [
+                "error",
+                10
+            ],
+            "max-depth": [
+                "error",
+                4
+            ],
+            "max-len": [
+                "error",
+                {
+                    "code": 120,
+                    "ignoreRegExpLiterals": true,
+                    "ignoreTemplateLiterals": true,
+                    "ignoreStrings": true,
+                    "ignoreTrailingComments": true
+                }
+            ],
+            "max-lines": [
+                "error",
+                300
+            ],
+            "max-nested-callbacks": [
+                "error",
+                3
+            ],
+            "max-params": [
+                "error",
+                3
+            ],
+            "max-statements": [
+                "error",
+                15
+            ],
+            "max-lines-per-function": [
+                "error",
+                {
+                    "max": 130,
+                    "skipBlankLines": true,
+                    "skipComments": true
+                }
+            ],
+            "react/jsx-indent": [
+                2,
+                4,
+                {
+                    "checkAttributes": false
+                }
+            ],
+            "react/jsx-indent-props": [
+                2,
+                4
+            ],
+            "@typescript-eslint/no-explicit-any": "error",
+            "arrow-parens": [
+                "error",
+                "as-needed"
+            ],
+            "@typescript-eslint/consistent-type-assertions": "error",
+            "@typescript-eslint/no-inferrable-types": "error",
+            "@typescript-eslint/no-misused-new": "error",
+            "@typescript-eslint/no-namespace": "error",
+            "@typescript-eslint/prefer-namespace-keyword": "error",
+            "@typescript-eslint/triple-slash-reference": "error",
+            "@typescript-eslint/type-annotation-spacing": "error",
+            "@typescript-eslint/await-thenable": "error",
+            "@typescript-eslint/consistent-type-definitions": "error",
+            "@typescript-eslint/no-floating-promises": "error",
+            "@typescript-eslint/no-parameter-properties": "error",
+            "@typescript-eslint/no-require-imports": "off",
+            "@typescript-eslint/no-unnecessary-qualifier": "error",
+            "@typescript-eslint/no-unnecessary-type-arguments": "error",
+            "@typescript-eslint/prefer-for-of": "error",
+            "@typescript-eslint/promise-function-async": "error",
+            "@typescript-eslint/restrict-plus-operands": "error",
+            "@typescript-eslint/unified-signatures": "error",
+            "yoda": "off",
+            "@typescript-eslint/no-unsafe-call": "error",
+            "@typescript-eslint/semi": [
+                "error",
+                "always"
+            ],
+            "@typescript-eslint/no-this-alias": [
+                "error"
+            ],
+            "react/no-danger": "error",
+            "react/no-unused-prop-types": "error",
+            "import/prefer-default-export": "off",
+            "import/no-cycle": "off",
+            "import/order": "warn",
+            "no-multi-assign": "off",
+            "@typescript-eslint/no-unused-vars": "warn",
+            "import/no-extraneous-dependencies": "error",
+            "import/no-unresolved": "error",
+            "prefer-destructuring": "error",
+            "react/jsx-wrap-multilines": "off",
+            "no-empty": "warn",
+            "react/jsx-one-expression-per-line": "off",
+            "react/jsx-no-duplicate-props": "off",
+            "jsx-a11y/click-events-have-key-events": "warn",
+            "jsx-a11y/no-static-element-interactions": "warn",
+            "jsx-a11y/anchor-is-valid": "warn",
+            "@typescript-eslint/quotes": [
+                "error",
+                "single",
+                {
+                    "avoidEscape": true
+                }
+            ],
+            "no-restricted-syntax": [
+                "error",
+                "FunctionExpression",
+                "WithStatement",
+                "BinaryExpression[operator='in']"
+            ],
+            "no-restricted-imports": [
+                "error",
+                {
+                    "patterns": [
+                        "src/*"
+                    ]
+                }
+            ],
+            "@typescript-eslint/ban-types": [
+                "error",
+                {
+                    "types": {
+                        "React.FC": "Don't use React.FC because it makes IDE type checking and auto complete harder.",
+                        "React.FunctionComponent": "Don't use React.FunctionComponent because it makes IDE type checking and auto complete harder."
+                    }
+                }
+            ],
+            "@typescript-eslint/explicit-function-return-type": 0,
+            "@typescript-eslint/explicit-module-boundary-types": 0,
+            "@typescript-eslint/no-empty-function": 0,
+            "@typescript-eslint/no-use-before-define": "off",
+            "react/prop-types": 0,
+            "react/require-default-props": 0,
+            "react/jsx-curly-newline": 0,
+            "react/jsx-props-no-spreading": 0
+        },
+        "settings": {
+            "import/parsers": {
+                "@typescript-eslint/parser": [
+                    ".ts",
+                    ".tsx"
+                ]
+            },
+            "import/resolver": {
+                "typescript": {}
+            }
+        },
+        "parserOptions": {
+            "project": "tsconfig.json"
+        }
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "printWidth": 80,
+        "singleQuote": true,
+        "arrowParens": "avoid"
+    }
+}
