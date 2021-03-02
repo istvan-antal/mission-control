@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-statements */
 import { gql, useQuery } from '@apollo/client';
 import { Text, View } from '@nodegui/react-nodegui';
@@ -179,6 +180,13 @@ const MilestoneView = ({ milestone }: { milestone: Milestone }) => {
 
     const teamDaysRemaining = Math.ceil(teamTimeRemaining / 8);
 
+    const closedIssues = nodes.filter(
+        item =>
+            item.state === 'closed' ||
+            item.labels.nodes.map(label => label.title).includes('Review')
+    );
+    const openIssues = nodes.filter(item => !closedIssues.includes(item));
+
     return (
         <View>
             <Text>{DateTime.fromSQL(milestone.dueDate).toFormat('d LLL')}</Text>
@@ -201,8 +209,7 @@ const MilestoneView = ({ milestone }: { milestone: Milestone }) => {
                         : ''
                 }
                 <div>
-                    ${nodes
-                        .filter(item => item.state === 'opened')
+                    ${openIssues
                         .map(
                             issue =>
                                 `<div>
@@ -215,8 +222,7 @@ const MilestoneView = ({ milestone }: { milestone: Milestone }) => {
                                 </div>`
                         )
                         .join('')}
-                    ${nodes
-                        .filter(item => item.state === 'closed')
+                    ${closedIssues
                         .map(
                             issue =>
                                 `
