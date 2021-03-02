@@ -7,7 +7,7 @@ import {
     QSystemTrayIcon,
 } from '@nodegui/nodegui';
 import path from 'path';
-import { Dock } from '@nodegui/os-utils';
+// import { Dock } from '@nodegui/os-utils';
 import icon from '../assets/check-circle-solid.png';
 import activeIcon from '../assets/exclamation-solid.png';
 
@@ -19,7 +19,7 @@ export const activeTrayIcon = new QIcon(
 export const tray = new QSystemTrayIcon();
 tray.setIcon(trayIcon);
 tray.show();
-tray.setToolTip('hello');
+tray.setToolTip('Mission Control');
 
 export const activate = () => {
     tray.setIcon(activeTrayIcon);
@@ -46,7 +46,7 @@ showAction.setShortcut(new QKeySequence('Alt+S'));
 menu.addAction(showAction);
 menu.addAction(quitAction);
 
-Dock.hide();
+// Dock.hide();
 
 const qApp = QApplication.instance();
 qApp.setQuitOnLastWindowClosed(false);

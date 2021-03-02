@@ -5,7 +5,7 @@ import App from './App';
 
 config();
 
-process.title = 'My NodeGui App';
+process.title = 'Mission Control';
 Renderer.render(<App />);
 // This is for hot reloading (this will be stripped off in production by webpack)
 if (module.hot) {
