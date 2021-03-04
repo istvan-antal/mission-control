@@ -1,4 +1,4 @@
-import { Text, Window, hot, View } from '@nodegui/react-nodegui';
+import { Text, Window, hot, View, ScrollArea } from '@nodegui/react-nodegui';
 import React, { useCallback, useEffect, useState } from 'react';
 import { QIcon } from '@nodegui/nodegui';
 import nodeguiIcon from '../assets/check-circle-solid.png';
@@ -35,18 +35,21 @@ const App = () => {
                 Close: hide,
             }}
         >
-            <View style={containerStyle}>
-                <MergeRequestsTodo />
-                <GitlabReleaseListWidget />
-            </View>
+            <ScrollArea>
+                <View id="app" style={containerStyle}>
+                    <MergeRequestsTodo />
+                    <GitlabReleaseListWidget />
+                </View>
+            </ScrollArea>
         </Window>
     );
 };
 
 const containerStyle = `
     flex: 1;
-    padding-top: 20px;
-    padding-horizontal: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
 `;
 
 const styleSheet = `
@@ -60,6 +63,10 @@ const styleSheet = `
         font-size: 18px;
         padding-top: 10px;
         padding-horizontal: 20px;
+    }
+
+    #app {
+        background-color: #FFF;
     }
 `;
 

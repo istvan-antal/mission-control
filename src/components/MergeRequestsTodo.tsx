@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { Text } from '@nodegui/react-nodegui';
+import { Text, View } from '@nodegui/react-nodegui';
 import React from 'react';
 import client from '../client';
 import { activate, deactivate } from '../systray';
@@ -105,12 +105,17 @@ const MergeRequestsTodo = () => {
         deactivate();
     }
 
+    if (!mergeRequestsOfInterest.length) {
+        return null;
+    }
     return (
-        <Text openExternalLinks>
-            {mergeRequestsOfInterest.map(
-                item => `<a href="${item.webUrl}">${item.title}</a>`
-            )}
-        </Text>
+        <View style="flex: 1; background-color: red;">
+            <Text openExternalLinks>
+                {mergeRequestsOfInterest.map(
+                    item => `<a href="${item.webUrl}">${item.title}</a>`
+                )}
+            </Text>
+        </View>
     );
 };
 

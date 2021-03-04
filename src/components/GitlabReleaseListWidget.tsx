@@ -188,7 +188,7 @@ const MilestoneView = ({ milestone }: { milestone: Milestone }) => {
     const openIssues = nodes.filter(item => !closedIssues.includes(item));
 
     return (
-        <View>
+        <View style="flex-direction: column;">
             <Text>{DateTime.fromSQL(milestone.dueDate).toFormat('d LLL')}</Text>
             <Text openExternalLinks>
                 {`<a
@@ -338,11 +338,16 @@ const GitlabReleaseListWidget = () => {
         .sort((a, b) => a.startDate.localeCompare(b.startDate));
 
     return (
-        <View>
+        <>
             {milestones.map(milestone => (
-                <MilestoneView key={milestone.id} milestone={milestone} />
+                <View
+                    key={milestone.id}
+                    style="flex: 1; padding: 10px; vertical-align: top;"
+                >
+                    <MilestoneView milestone={milestone} />
+                </View>
             ))}
-        </View>
+        </>
     );
 };
 
