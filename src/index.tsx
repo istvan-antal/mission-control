@@ -1,9 +1,9 @@
 import { Renderer } from '@nodegui/react-nodegui';
 import React from 'react';
-import { config } from 'dotenv';
+import { config as dotEnvConfig } from 'dotenv';
 import App from './App';
 
-config();
+dotEnvConfig();
 
 process.title = 'Mission Control';
 Renderer.render(<App />);

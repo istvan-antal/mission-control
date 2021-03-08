@@ -217,7 +217,20 @@ const MilestoneView = ({ milestone }: { milestone: Milestone }) => {
                                     href="${issue.webUrl}"
                                     target="_blank"
                                 >
-                                    ${issue.title}
+                                    ${issue.labels.nodes
+                                        .filter(
+                                            node =>
+                                                ![
+                                                    'Review',
+                                                    'Task',
+                                                    'Bug',
+                                                    'Doing',
+                                                    'To Do',
+                                                    'User Story',
+                                                ].includes(node.title)
+                                        )
+                                        .map(node => `[${node.title}]`)
+                                        .join(' ')} ${issue.title}
                                 </a>
                                 </div>`
                         )
@@ -304,7 +317,10 @@ const MilestoneView = ({ milestone }: { milestone: Milestone }) => {
     */
 };
 
-const GitlabReleaseListWidget = () => {
+const GitlabReleaseListWidget = ({}: {
+    accessToken: string;
+    gitlabGroup: string;
+}) => {
     const { data, error, loading } = useQuery<MilestoneListResult>(
         milestonesQuery,
         {

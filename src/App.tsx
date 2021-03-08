@@ -1,21 +1,34 @@
-import { Text, Window, hot, View, ScrollArea } from '@nodegui/react-nodegui';
+import {
+    Text,
+    Window,
+    hot,
+    View,
+    ScrollArea,
+    Button,
+    ComboBox,
+    LineEdit,
+} from '@nodegui/react-nodegui';
 import React, { useCallback, useEffect, useState } from 'react';
 import { QIcon } from '@nodegui/nodegui';
 import nodeguiIcon from '../assets/check-circle-solid.png';
 import MergeRequestsTodo from './components/MergeRequestsTodo';
 import { showAction } from './systray';
 import GitlabReleaseListWidget from './components/GitlabReleaseListWidget';
+import { addWidget, getWidgets, Widget } from './services/config';
+import WidgetForm from './components/WidgetForm';
 
 const minSize = { width: 500, height: 520 };
 const winIcon = new QIcon(nodeguiIcon);
+
 const App = () => {
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(true);
     const show = useCallback(() => {
         setVisible(true);
     }, []);
     const hide = useCallback(() => {
         setVisible(false);
     }, []);
+    const [widgets, setWidgets] = useState<Widget[]>(getWidgets());
 
     useEffect(() => {
         showAction.addEventListener('triggered', show);
@@ -37,8 +50,34 @@ const App = () => {
         >
             <ScrollArea>
                 <View id="app" style={containerStyle}>
-                    <MergeRequestsTodo />
-                    <GitlabReleaseListWidget />
+                    {widgets.map((widget, index) => {
+                        switch (widget.type) {
+                            case 'GitlabMergeRequestToDoList':
+                                return (
+                                    <MergeRequestsTodo
+                                        key={index}
+                                        accessToken={widget.accessToken}
+                                        gitlabGroup={widget.gitlabGroup}
+                                    />
+                                );
+                            case 'GitlabReleaseMilestoneList':
+                                return (
+                                    <GitlabReleaseListWidget
+                                        key={index}
+                                        accessToken={widget.accessToken}
+                                        gitlabGroup={widget.gitlabGroup}
+                                    />
+                                );
+                            default:
+                                throw new Error('Invalid widget type');
+                        }
+                    })}
+                    <WidgetForm
+                        onSave={widget => {
+                            addWidget(widget);
+                            setWidgets([...getWidgets()]);
+                        }}
+                    />
                 </View>
             </ScrollArea>
         </Window>

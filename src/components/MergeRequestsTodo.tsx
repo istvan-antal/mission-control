@@ -68,10 +68,15 @@ interface QueryResult {
     };
 }
 
-const MergeRequestsTodo = () => {
+const MergeRequestsTodo = ({
+    gitlabGroup,
+}: {
+    accessToken: string;
+    gitlabGroup: string;
+}) => {
     const { data, error, loading } = useQuery<QueryResult>(query, {
         variables: {
-            fullPath: process.env.GITLAB_MR_GROUP,
+            fullPath: gitlabGroup,
         },
         pollInterval: 5000,
         client,
