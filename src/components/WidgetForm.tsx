@@ -35,7 +35,9 @@ const WidgetForm = ({ onSave }: { onSave: (widget: Widget) => void }) => {
                         const widgetType = widgetTypes.find(
                             item => item.label === text
                         );
-                        assert(widgetType);
+                        if (!widgetType) {
+                            return;
+                        }
                         currentWidgetType.current = widgetType;
                     },
                 }}

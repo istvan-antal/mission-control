@@ -41,9 +41,7 @@ const saveConfig = () => {
         mkdirSync(paths.config, { recursive: true });
     }
 
-    if (!existsSync(CONFIG_FILE_PATH)) {
-        writeFileSync(CONFIG_FILE_PATH, JSON.stringify(config));
-    }
+    writeFileSync(CONFIG_FILE_PATH, JSON.stringify(config));
 };
 
 loadConfig();
@@ -51,6 +49,7 @@ loadConfig();
 export const getWidgets = () => config.widgets;
 
 export const addWidget = (widget: Widget) => {
+    console.log('addWidget', widget);
     config.widgets.push(widget);
     saveConfig();
 };
