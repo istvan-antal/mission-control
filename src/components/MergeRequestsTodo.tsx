@@ -70,6 +70,7 @@ interface QueryResult {
 
 const MergeRequestsTodo = ({
     gitlabGroup,
+    accessToken,
 }: {
     accessToken: string;
     gitlabGroup: string;
@@ -78,9 +79,26 @@ const MergeRequestsTodo = ({
         variables: {
             fullPath: gitlabGroup,
         },
+        context: {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        },
         pollInterval: 5000,
         client,
     });
+
+    if (error) {
+        return <Text>{error.toString()}</Text>;
+    }
+
+    if (loading) {
+        return null;
+    }
+
+    if (!data?.group) {
+        console.log(data);
+    }
     const mergeRequestsOfInterest =
         data?.group.mergeRequests.nodes
             .filter(mr => !mr.workInProgress)
@@ -98,9 +116,6 @@ const MergeRequestsTodo = ({
                         .includes(data.currentUser.username)
             ) ?? [];
 
-    if (error) {
-        console.error(error);
-    }
     console.log('Update', mergeRequestsOfInterest.length);
     console.log(mergeRequestsOfInterest);
 
